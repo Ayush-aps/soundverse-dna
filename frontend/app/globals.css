@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-Regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "PowerGrotesk";
+  src: url("./fonts/PowerGrotesk-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+.dna-heading {
+  font-family: "PowerGrotesk", sans-serif;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid #8f78ff;
+  box-shadow: 0 0 12px rgba(143, 120, 255, 0.6);
+}
+
+.range-input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid #8f78ff;
+  box-shadow: 0 0 12px rgba(143, 120, 255, 0.6);
+}
+
+.range-input-vertical {
+  -webkit-appearance: slider-vertical;
+  appearance: none;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.range-input-vertical::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid #8f78ff;
+  box-shadow: 0 0 12px rgba(143, 120, 255, 0.6);
+}
+
+.range-input-vertical::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 2px solid #8f78ff;
+  box-shadow: 0 0 12px rgba(143, 120, 255, 0.6);
+}
+
+/* Smooth transitions for interactive elements */
+@keyframes subtle-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(106, 91, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(106, 91, 255, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: subtle-glow 2s ease-in-out infinite;
+}
