@@ -176,7 +176,7 @@ export default function GlobalPlayer() {
                             value={ctx.volume}
                             onChange={(e) => ctx.setVolume(parseFloat(e.target.value))}
                             className="range-input-vertical h-16"
-                            style={{ writingMode: 'bt-lr', WebkitAppearance: 'slider-vertical' }}
+                            style={{ writingMode: 'vertical-rl' as const, WebkitAppearance: 'slider-vertical' as any }}
                             aria-label="Volume"
                           />
                         </div>
