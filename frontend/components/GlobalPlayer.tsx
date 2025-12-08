@@ -105,14 +105,14 @@ export default function GlobalPlayer() {
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="fixed inset-x-0 bottom-0 z-50 border-t border-white/5 bg-[#050505]/95 backdrop-blur-lg pb-safe"
         >
-          <div className="mx-auto flex max-w-[1400px] flex-col gap-2 sm:gap-3 px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 text-white">
+          <div className="mx-auto flex max-w-[1400px] flex-col gap-1.5 px-4 md:px-6 py-2 text-white">
             <div className="flex items-center gap-2 md:w-64 md:flex-shrink-0">
-              <div className="relative h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg flex-shrink-0">
+              <div className="relative h-9 w-9 overflow-hidden rounded-lg border border-white/10 bg-white/5 shadow-lg flex-shrink-0">
                 <Image src={ctx.current.cover || "/music/coldplay-cover.png"} alt={ctx.current.title} fill sizes="(max-width: 640px) 40px, 48px" className="object-cover" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs sm:text-sm font-semibold leading-tight">{ctx.current.title}</p>
-                <p className="truncate text-[10px] sm:text-xs text-white/60">{ctx.current.artist}</p>
+                <p className="truncate text-xs font-semibold leading-tight">{ctx.current.title}</p>
+                <p className="truncate text-[10px] text-white/60">{ctx.current.artist}</p>
               </div>
             </div>
 
@@ -129,7 +129,7 @@ export default function GlobalPlayer() {
                 </button>
                 <button
                   onClick={ctx.togglePlay}
-                  className="flex size-10 sm:size-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:border-white/40 hover:bg-white/15 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
+                  className="flex size-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:border-white/40 hover:bg-white/15 hover:scale-105 active:scale-95 cursor-pointer shadow-lg"
                   aria-label={ctx.playing ? "Pause" : "Play"}
                   title={ctx.playing ? "Pause (Space)" : "Play (Space)"}
                 >
@@ -138,7 +138,7 @@ export default function GlobalPlayer() {
                 <button
                   onClick={ctx.nextTrack}
                   disabled={!ctx.queue.length || ctx.queue.findIndex(t => t.id === ctx.current?.id) === ctx.queue.length - 1}
-                  className="group flex size-8 sm:size-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                  className="group flex size-7 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                   aria-label="Next track"
                   title="Next (N)"
                 >
@@ -185,14 +185,14 @@ export default function GlobalPlayer() {
                   </AnimatePresence>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-[10px] sm:text-xs text-white/60">
-                <span className="w-9 sm:w-12 text-right text-[9px] sm:text-xs">{formatTime(ctx.currentTime)}</span>
-                <div className="relative flex-1 h-6 flex items-center">
+              <div className="flex items-center gap-2 text-[10px] text-white/60">
+                <span className="w-9 text-right text-[9px]">{formatTime(ctx.currentTime)}</span>
+                <div className="relative flex-1 h-5 flex items-center">
                   {/* Background track */}
-                  <div className="pointer-events-none absolute inset-x-0 h-1.5 rounded-full bg-white/10" style={{ top: '50%', transform: 'translateY(-50%)' }} />
+                  <div className="pointer-events-none absolute inset-x-0 h-1 rounded-full bg-white/10" style={{ top: '50%', transform: 'translateY(-50%)' }} />
                   {/* Progress bar */}
                   <div 
-                    className="pointer-events-none absolute left-0 h-1.5 rounded-full bg-linear-to-r from-[#6a5bff] via-[#a855f7] to-[#ff8bd5]" 
+                    className="pointer-events-none absolute left-0 h-1 rounded-full bg-linear-to-r from-[#6a5bff] via-[#a855f7] to-[#ff8bd5]" 
                     style={{ 
                       width: `${completion}%`, 
                       top: '50%', 
@@ -202,7 +202,7 @@ export default function GlobalPlayer() {
                   />
                   {/* Progress dot - moves in real-time with music */}
                   <div 
-                    className="pointer-events-none absolute w-3.5 h-3.5 rounded-full bg-white border-2 border-[#8f78ff] shadow-[0_0_12px_rgba(143,120,255,0.6)]"
+                    className="pointer-events-none absolute w-3 h-3 rounded-full bg-white border-2 border-[#8f78ff] shadow-[0_0_12px_rgba(143,120,255,0.6)]"
                     style={{ 
                       left: `${completion}%`, 
                       top: '50%',
@@ -227,7 +227,7 @@ export default function GlobalPlayer() {
                     aria-label="Seek audio"
                   />
                 </div>
-                <span className="w-9 sm:w-12 text-[9px] sm:text-xs">{formatTime(ctx.duration)}</span>
+                <span className="w-9 text-[9px]">{formatTime(ctx.duration)}</span>
               </div>
             </div>
           </div>

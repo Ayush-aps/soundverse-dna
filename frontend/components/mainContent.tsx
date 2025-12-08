@@ -59,8 +59,8 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="inter flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-32 pt-8 sm:pt-12 text-white xl:px-16"
     >
-      <header className="mb-8 md:mb-10 flex flex-col sm:flex-row flex-wrap items-center gap-6 sm:gap-8">
-        <div className="relative h-36 w-36 sm:h-44 sm:w-44 md:h-52 md:w-52 overflow-hidden rounded-full border border-white/10 bg-linear-to-br from-[#151515] to-[#050505]">
+      <header className="mb-6 flex flex-col sm:flex-row flex-wrap items-center gap-6">
+        <div className="relative h-32 w-32 sm:h-36 sm:w-36 overflow-hidden rounded-full border border-white/10 bg-linear-to-br from-[#151515] to-[#050505]">
           <Image src="/music/coldplay-cover.png" alt="Coldplay artwork" fill sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 208px" className="rounded-full object-cover" priority />
           <WaveformBadge />
         </div>
@@ -68,7 +68,7 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.55em] text-white/40">Current Artist</p>
-              <h1 className="dna-heading text-4xl sm:text-5xl md:text-6xl lg:text-[84px] leading-none tracking-[0.12em] text-white truncate">COLDPLAY</h1>
+              <h1 className="dna-heading text-5xl sm:text-6xl leading-none tracking-[0.12em] text-white truncate">COLDPLAY</h1>
             </div>
             <button
               onClick={onClose}
@@ -118,7 +118,7 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
           {error}
         </div>
       ) : (
-        <div className="grid gap-4 sm:gap-5 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-5 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3">
           {filteredPresets.map((preset) => (
             <StyleCard key={preset.id} preset={preset} onPlay={() => audio.playTrack({ id: preset.id, title: preset.title, artist: "Coldplay", src: preset.audioUrl, cover: preset.imageUrl })} />
           ))}

@@ -53,7 +53,7 @@ export default function RootLayout({
                 <SideBar />
 
                 {/* MAIN PAGE AREA */}
-                <main className="flex-1 overflow-y-auto">
+                <main className="flex-1 overflow-y-auto" style={{ marginLeft: 0 }}>
                   {children}
                 </main>
               </div>
