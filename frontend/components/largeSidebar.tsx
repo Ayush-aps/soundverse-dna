@@ -95,7 +95,7 @@ export default function LeftSidebar({
         x: isOpen || (typeof window !== 'undefined' && window.innerWidth >= 1024) ? 0 : -400
       }}
       initial={false}
-      className="inter h-full border-r border-[#1f1f1f] bg-[#050505] text-white shadow-[20px_0_60px_rgba(0,0,0,0.35)] z-30 lg:relative fixed left-0 top-0 bottom-0"
+      className="inter h-full bg-[#0a0a0a] border-r border-[#1f1f1f] text-white shadow-[20px_0_60px_rgba(0,0,0,0.35)] z-30 lg:relative fixed left-0 top-0 bottom-0"
       transition={{ duration: 0.25, ease: "easeInOut" }}
     >
       <AnimatePresence initial={false} mode="wait">
@@ -106,9 +106,9 @@ export default function LeftSidebar({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -12 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="inter flex h-full flex-col px-4 sm:px-6 pb-4 sm:pb-6 pt-5 sm:pt-7"
+            className="inter flex h-full flex-col overflow-hidden"
           >
-            <div className="flex flex-1 flex-col overflow-y-auto pr-1 sm:pr-2">
+            <div className="flex flex-col overflow-y-auto pr-1 sm:pr-2 pb-4 px-4 sm:px-6 pt-5 sm:pt-7">
               <header className="mb-6 sm:mb-8 flex items-center justify-between">
               <div>
                 <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[#6A6A6A]">Soundverse</p>
@@ -130,8 +130,8 @@ export default function LeftSidebar({
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 rounded-full border px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs uppercase tracking-wide transition cursor-pointer ${
                     activeTab === tab.id
-                      ? "border-white/40 bg-white/10 text-white"
-                      : "border-white/5 text-white/60 hover:border-white/20 hover:text-white/90"
+                      ? "border-white/20 bg-[#2a2a2a] text-white/90"
+                      : "border-white/10 bg-[#1a1a1a] text-white/50 hover:border-white/15 hover:bg-[#202020] hover:text-white/70"
                   }`}
                 >
                   {tab.label}
@@ -170,7 +170,7 @@ export default function LeftSidebar({
                       key={option}
                       onClick={() => setSelectedOutput(option)}
                       className={`flex-1 rounded-full border px-2 sm:px-3 py-1.5 sm:py-2 text-[10px] sm:text-[11px] font-medium transition cursor-pointer ${
-                        active ? "border-white text-white shadow-[0_10px_35px_rgba(105,73,255,0.25)]" : "border-white/10 text-white/60 hover:border-white/30 hover:text-white/90"
+                        active ? "border-white/20 bg-[#2a2a2a] text-white/90" : "border-white/10 bg-[#1a1a1a] text-white/50 hover:border-white/15 hover:bg-[#202020] hover:text-white/70"
                       }`}
                     >
                       {option}
@@ -180,12 +180,12 @@ export default function LeftSidebar({
               </div>
             </section>
 
-            <section className="flex-1 min-h-0">
+            <section className="flex-shrink-0">
               <div className="mb-2 sm:mb-3 flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs flex-wrap">
-                <button className="rounded-full bg-white/5 px-3 sm:px-4 py-1 text-white/70 transition hover:bg-white/10 cursor-pointer whitespace-nowrap">
+                <button className="rounded-full bg-[#1a1a1a] border border-white/10 px-3 sm:px-4 py-1 text-white/50 transition hover:bg-[#202020] hover:text-white/70 cursor-pointer whitespace-nowrap">
                   Describe your song
                 </button>
-                <button className="rounded-full bg-white/15 px-3 sm:px-4 py-1 text-white transition hover:bg-white/25 cursor-pointer whitespace-nowrap">
+                <button className="rounded-full bg-[#2a2a2a] border border-white/20 px-3 sm:px-4 py-1 text-white/90 transition hover:bg-[#303030] cursor-pointer whitespace-nowrap">
                   Lyrics
                 </button>
               </div>
@@ -195,7 +195,7 @@ export default function LeftSidebar({
                   onChange={(event) => setLyrics(event.target.value.slice(0, charLimit))}
                   maxLength={charLimit}
                   placeholder="Enter your own lyrics"
-                  className="h-full w-full resize-none rounded-2xl border border-white/10 bg-[#090909]/90 p-3 sm:p-4 text-xs sm:text-sm text-white/90 outline-none transition focus:border-white/30"
+                  className="h-full w-full resize-none rounded-2xl border border-white/10 bg-[#0f0f0f] p-3 sm:p-4 text-xs sm:text-sm text-white/80 placeholder:text-white/30 outline-none transition focus:border-white/30"
                   aria-label="Lyrics input"
                 />
                 <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/5 blur-3xl" />
@@ -216,7 +216,7 @@ export default function LeftSidebar({
             </section>
             </div>
 
-            <div className="pt-3 sm:pt-4">
+            <div className="flex-shrink-0 px-4 sm:px-6 pb-4 sm:pb-6 pt-4 border-t border-white/5">
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
@@ -238,7 +238,7 @@ export default function LeftSidebar({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="inter h-full px-4"
+            className="inter h-full"
           >
             {collapsedRail}
           </motion.div>

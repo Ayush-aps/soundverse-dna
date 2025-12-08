@@ -94,17 +94,21 @@ export default function GlobalPlayer() {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [ctx]);
 
+  // Only show player if there's a current track
+  if (!ctx.current) {
+    return null;
+  }
+
   return (
     <AnimatePresence>
-      {ctx.current ? (
-        <motion.div
-          key="player"
-          initial={{ y: 120, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 120, opacity: 0 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-white/5 bg-[#050505]/95 backdrop-blur-lg pb-safe"
-        >
+      <motion.div
+        key="player"
+        initial={{ y: 120, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 120, opacity: 0 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-white/5 bg-[#050505]/95 backdrop-blur-lg pb-safe"
+      >
           <div className="mx-auto flex max-w-[1400px] flex-col gap-1.5 px-4 md:px-6 py-2 text-white">
             <div className="flex items-center gap-2 md:w-64 md:flex-shrink-0">
               <div className="relative h-9 w-9 overflow-hidden rounded-lg border border-white/10 bg-white/5 shadow-lg flex-shrink-0">
@@ -232,7 +236,6 @@ export default function GlobalPlayer() {
             </div>
           </div>
         </motion.div>
-      ) : null}
     </AnimatePresence>
   );
 }

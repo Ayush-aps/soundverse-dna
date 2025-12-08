@@ -57,10 +57,10 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 32 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="inter flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-10 pb-32 pt-8 sm:pt-12 text-white xl:px-16"
+      className="inter h-full overflow-y-auto px-6 lg:px-8 pb-32 pt-6 lg:pt-8 text-white"
     >
-      <header className="mb-6 flex flex-col sm:flex-row flex-wrap items-center gap-6">
-        <div className="relative h-32 w-32 sm:h-36 sm:w-36 overflow-hidden rounded-full border border-white/10 bg-linear-to-br from-[#151515] to-[#050505]">
+      <header className="mb-6 flex flex-col sm:flex-row flex-wrap items-center gap-4">
+        <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-white/10 bg-linear-to-br from-[#151515] to-[#050505]">
           <Image src="/music/coldplay-cover.png" alt="Coldplay artwork" fill sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 208px" className="rounded-full object-cover" priority />
           <WaveformBadge />
         </div>
@@ -68,7 +68,7 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.55em] text-white/40">Current Artist</p>
-              <h1 className="dna-heading text-5xl sm:text-6xl leading-none tracking-[0.12em] text-white truncate">COLDPLAY</h1>
+              <h1 className="dna-heading text-4xl sm:text-5xl leading-none tracking-[0.12em] text-white truncate">COLDPLAY</h1>
             </div>
             <button
               onClick={onClose}
@@ -90,10 +90,10 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
         </div>
       </header>
 
-      <div className="mb-8 h-px w-full bg-linear-to-r from-transparent via-white/10 to-transparent" />
+      <div className="mb-6 h-px w-full bg-linear-to-r from-transparent via-white/10 to-transparent" />
 
       <LayoutGroup id="dna-tabs">
-        <div className="mb-8 md:mb-10 flex justify-start">
+        <div className="mb-6 flex justify-start">
           <div className="inline-flex flex-wrap items-center gap-1 sm:gap-2 rounded-full border border-white/10 bg-white/5 p-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white/60">
             {["core", "signature"].map((tab) => (
               <button
@@ -118,7 +118,11 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
           {error}
         </div>
       ) : (
-        <div className="grid gap-5 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3">
+        <div className={`grid gap-4 ${
+          activeTab === "core" 
+            ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" 
+            : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+        } max-w-[1400px]`}>
           {filteredPresets.map((preset) => (
             <StyleCard key={preset.id} preset={preset} onPlay={() => audio.playTrack({ id: preset.id, title: preset.title, artist: "Coldplay", src: preset.audioUrl, cover: preset.imageUrl })} />
           ))}
@@ -147,8 +151,10 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
   );
 
   return (
-    <div className="flex-1 bg-[#050505]">
-      <AnimatePresence initial={false}>{isVisible ? content : placeholder}</AnimatePresence>
+    <div className="flex-1 bg-[#000000] p-4 lg:p-6">
+      <div className="h-full bg-[#0f0f0f] rounded-3xl overflow-hidden border border-white/5">
+        <AnimatePresence initial={false}>{isVisible ? content : placeholder}</AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -164,7 +170,7 @@ function StyleCard({ preset, onPlay }: { preset: StylePreset; onPlay: () => void
       onClick={onPlay}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/5 bg-[#0b0b0b]/70 text-left shadow-[0_35px_60px_rgba(0,0,0,0.45)] transition-shadow duration-300 hover:shadow-[0_45px_80px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8FDBFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] cursor-pointer"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0b0b0b]/70 text-left shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-shadow duration-300 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8FDBFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505] cursor-pointer"
       style={{
         boxShadow: isHovered ? `0 45px 80px rgba(0,0,0,0.6), 0 0 40px ${preset.accent}20` : undefined
       }}
@@ -202,23 +208,23 @@ function StyleCard({ preset, onPlay }: { preset: StylePreset; onPlay: () => void
           }}
         />
       </div>
-      <div className="space-y-2 px-5 py-4 relative z-10">
+      <div className="space-y-1.5 px-4 py-3 relative z-10">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white group-hover:text-white transition-colors">{preset.title}</h3>
+          <h3 className="text-base font-semibold text-white group-hover:text-white transition-colors">{preset.title}</h3>
           <span 
-            className="text-[10px] uppercase tracking-[0.3em] transition-colors"
+            className="text-[9px] uppercase tracking-[0.3em] transition-colors"
             style={{ color: isHovered ? preset.accent : 'rgba(255, 255, 255, 0.4)' }}
           >
             {preset.category === "core" ? "Core" : "Sig"}
           </span>
         </div>
-        <p className="text-sm text-white/60 group-hover:text-white/80 transition-colors">{preset.description}</p>
-        <p className="text-xs text-white/40 group-hover:text-white/60 transition-colors">{preset.mood}</p>
-        <div className="flex flex-wrap gap-2 pt-1">
-          {preset.tags.map((tag) => (
+        <p className="text-xs text-white/60 group-hover:text-white/80 transition-colors line-clamp-1">{preset.description}</p>
+        <p className="text-[11px] text-white/40 group-hover:text-white/60 transition-colors line-clamp-1">{preset.mood}</p>
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {preset.tags.slice(0, 3).map((tag) => (
             <span 
               key={tag} 
-              className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/60 transition-all group-hover:border-white/30 group-hover:text-white/80 group-hover:bg-white/5"
+              className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-white/60 transition-all group-hover:border-white/30 group-hover:text-white/80 group-hover:bg-white/5"
             >
               {tag}
             </span>

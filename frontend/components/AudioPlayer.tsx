@@ -50,17 +50,13 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   // Load last played from localStorage
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("dna-last-track");
       const savedVolume = localStorage.getItem("dna-volume");
       const savedMuted = localStorage.getItem("dna-muted");
       
       if (savedVolume) setVolumeState(parseFloat(savedVolume));
       if (savedMuted) setMuted(savedMuted === "true");
       
-      if (saved) {
-        const track = JSON.parse(saved) as Track;
-        setCurrent(track);
-      }
+      // Don't auto-load the last track on mount - only show player when user plays something
     } catch (e) {
       console.warn("Failed to load saved audio state:", e);
     }
