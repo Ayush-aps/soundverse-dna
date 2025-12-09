@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { useAudio } from "./AudioPlayer";
@@ -59,38 +60,53 @@ export default function MainContent({ isVisible, onClose, onRequestOpen }: Props
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="inter h-full overflow-y-auto px-6 lg:px-8 pb-32 pt-6 lg:pt-8 text-white"
     >
-      <header className="mb-6 flex flex-col sm:flex-row flex-wrap items-center gap-4">
-        <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-white/10 bg-linear-to-br from-[#151515] to-[#050505]">
-          <Image src="/music/coldplay-cover.png" alt="Coldplay artwork" fill sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, 208px" className="rounded-full object-cover" priority />
-          <WaveformBadge />
-        </div>
-        <div className="flex-1 min-w-0 w-full sm:min-w-[280px]">
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0 flex-1">
-              <p className="text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.55em] text-white/40">Current Artist</p>
-              <h1 className="dna-heading text-4xl sm:text-5xl leading-none tracking-[0.12em] text-white truncate">COLDPLAY</h1>
-            </div>
-            <button
-              onClick={onClose}
-              aria-label="Close style panel"
-              className="flex-shrink-0 rounded-full border border-white/10 p-2 sm:p-3 text-white/70 transition hover:border-white/40 hover:text-white cursor-pointer"
-            >
-              <CloseIcon />
-            </button>
+      <header className="mb-8 relative rounded-3xl overflow-hidden" style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 35%, #321b55 0%, #221244 25%, #0f0f0f 60%, #0f0f0f 100%)' }}>
+        <div className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
+          {/* Logo - circular with gradient background */}
+          <div className="relative h-32 w-32 sm:h-40 sm:w-40 flex-shrink-0 rounded-full overflow-hidden border border-white/10" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)' }}>
+            <Image 
+              src="/Inpainting.png" 
+              alt="Coldplay DNA" 
+              fill 
+              sizes="(max-width: 640px) 128px, 160px" 
+              className="object-cover scale-125" 
+              priority 
+              style={{ objectPosition: 'center' }}
+            />
           </div>
-          <p className="inter mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm text-white/70">
-            EDM visionary known for hit remixes and artist management. 6 Core Styles and 30 Signature Sounds.
-            Built for genre-fluid experimentation with precise control.
-          </p>
-          <div className="mt-2 sm:mt-3 flex flex-wrap gap-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-white/40">
-            {heroGenres.map((genre) => (
-              <span key={genre}>{genre}</span>
-            ))}
+          
+          {/* Content */}
+          <div className="flex-1 min-w-0 w-full text-center sm:text-left">
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-6xl sm:text-7xl lg:text-8xl tracking-wider text-white mb-4" style={{ fontFamily: 'Montserrat, Poppins, system-ui, sans-serif', fontWeight: 900, letterSpacing: '0.05em' }}>
+                  COLDPLAY
+                </h1>
+                <p className="text-sm sm:text-base text-white/80 mb-3 max-w-3xl whitespace-nowrap overflow-hidden text-ellipsis">
+                  EDM visionary known for hit remixes and artist management. 6 Core Styles and 30 Signature Sounds.
+                </p>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-white/60">
+                  {heroGenres.map((genre, index) => (
+                    <React.Fragment key={genre}>
+                      <span>{genre}</span>
+                      {index < heroGenres.length - 1 && <span className="text-white/40">•</span>}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                aria-label="Close style panel"
+                className="flex-shrink-0 rounded-full border border-white/10 p-2 sm:p-3 text-white/70 transition hover:border-white/40 hover:text-white cursor-pointer"
+              >
+                <CloseIcon />
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="mb-6 h-px w-full bg-linear-to-r from-transparent via-white/10 to-transparent" />
+      <div className="mb-6 h-px w-full bg-white/10" />
 
       <LayoutGroup id="dna-tabs">
         <div className="mb-6 flex justify-start">
